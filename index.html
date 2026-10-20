@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="TRILLION — premium men's trico. Precision fit, freedom of movement. Tashkent.">
+<meta name="theme-color" content="#0a0a0a">
+<title>TRILLION — Premium Men's Trico</title>
+
+<!-- Google Fonts: Playfair Display (headings) + Montserrat (body) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   1. DESIGN TOKENS
+   ============================================================ */
+:root{
+  --bg:#0a0a0a;
+  --bg-soft:#101010;
+  --gold:#d4af37;
+  --gold-light:#e8cd7a;
+  --gold-dark:#a9842a;
+  --white:#ffffff;
+  --muted:rgba(255,255,255,.56);
+  --faint:rgba(255,255,255,.34);
+  --line:rgba(255,255,255,.09);
+  --ease:cubic-bezier(.22,1,.36,1);
+  --pad-x:clamp(22px,5vw,64px);
+  --section-y:clamp(86px,11vw,150px);
+  --maxw:1280px;
+}
+
+/* ============================================================
+   2. RESET / BASE
+   ============================================================ */
+*,*::before,*::after{box-sizing:border-box;}
+html{
+  scroll-behavior:smooth;
+  -webkit-text-size-adjust:100%;
+}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--white);
+  font-family:'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  font-weight:300;
+  font-size:16px;
+  line-height:1.75;
+  letter-spacing:.012em;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+img{display:block;max-width:100%;}
+a{color:inherit;text-decoration:none;}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;}
+h1,h2,h3,p,figure,ul{margin:0;}
+ul{padding:0;list-style:none;}
+::selection{background:var(--gold);color:#0a0a0a;}
+
+/* Fine film grain for a printed, tactile feel */
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:900;
+  pointer-events:none;
+  opacity:.032;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/></filter><rect width='180' height='180' filter='url(%23n)'/></svg>");
+}
+
+/* ============================================================
+   3. SHARED UTILITIES
+   ============================================================ */
+.container{
+  width:100%;
+  max-width:var(--maxw);
+  margin:0 auto;
+}
+.eyebrow{
+  font-size:.66rem;
+  font-weight:500;
+  letter-spacing:.34em;
+  text-transform:uppercase;
+  color:var(--gold);
+}
+.eyebrow .idx{color:var(--faint);margin-right:.9em;letter-spacing:.2em;}
+.rule{
+  display:block;
+  width:46px;
+  height:1px;
+  background:linear-gradient(90deg,var(--gold),rgba(212,175,55,0));
+}
+
+/* Scroll-triggered fade-in (see IntersectionObserver in JS) */
+.reveal{
+  opacity:0;
+  transform:translateY(34px);
+  transition:opacity 1.05s var(--ease),transform 1.05s var(--ease);
+  transition-delay:var(--d,0s);
+}
+.reveal.is-visible{opacity:1;transform:none;}
+
+/* ============================================================
+   4. HEADER
+   ============================================================ */
+.site-header{
+  position:fixed;
+  top:0;left:0;right:0;
+  z-index:800;
+  padding:26px var(--pad-x);
+  transition:background .5s ease,padding .5s ease,border-color .5s ease,backdrop-filter .5s ease;
+  border-bottom:1px solid transparent;
+}
+.site-header.is-scrolled{
+  padding:16px var(--pad-x);
+  background:rgba(8,8,8,.82);
+  border-bottom-color:var(--line);
+  -webkit-backdrop-filter:blur(16px) saturate(140%);
+  backdrop-filter:blur(16px) saturate(140%);
+}
+.header-inner{
+  max-width:var(--maxw);
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+}
+.logo{
+  font-family:'Playfair Display',serif;
+  font-weight:500;
+  font-size:clamp(1.05rem,2vw,1.35rem);
+  letter-spacing:.34em;
+  color:var(--gold);
+  text-indent:.34em; /* balances trailing letter-space */
+  white-space:nowrap;
+  transition:opacity .4s ease;
+}
+.logo:hover{opacity:.72;}
+
+.nav{display:flex;gap:clamp(20px,2.6vw,42px);}
+.nav a{
+  position:relative;
+  font-size:.68rem;
+  font-weight:400;
+  letter-spacing:.26em;
+  text-transform:uppercase;
+  color:var(--muted);
+  padding:6px 0;
+  transition:color .4s ease;
+}
+.nav a::after{
+  content:"";
+  position:absolute;
+  left:0;bottom:0;
+  width:100%;height:1px;
+  background:var(--gold);
+  transform:scaleX(0);
+  transform-origin:right;
+  transition:transform .5s var(--ease);
+}
+.nav a:hover{color:var(--white);}
+.nav a:hover::after{transform:scaleX(1);transform-origin:left;}
+
+/* Language switcher */
+.lang{
+  display:flex;
+  align-items:center;
+  gap:2px;
+  padding:4px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  background:rgba(255,255,255,.02);
+}
+.lang-btn{
+  padding:7px 15px;
+  border-radius:999px;
+  font-size:.64rem;
+  font-weight:600;
+  letter-spacing:.16em;
+  color:var(--muted);
+  transition:color .35s ease,background .35s ease;
+}
+.lang-btn:hover{color:var(--white);}
+.lang-btn.is-active{
+  background:var(--gold);
+  color:#0a0a0a;
+}
+
+/* ============================================================
+   5. HERO
+   ============================================================ */
+.hero{
+  position:relative;
+  min-height:100vh;
+  min-height:100svh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  padding:130px var(--pad-x) 96px;
+  text-align:center;
+}
+.hero::before{
+  content:"";
+  position:absolute;
+  left:50%;top:46%;
+  width:min(1000px,130vw);
+  aspect-ratio:1;
+  transform:translate(-50%,-50%);
+  background:radial-gradient(circle,rgba(212,175,55,.11) 0%,rgba(212,175,55,.045) 34%,transparent 64%);
+  pointer-events:none;
+}
+/* Oversized background wordmark — parallax layer */
+.hero-bg{
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+  pointer-events:none;
+  user-select:none;
+}
+.hero-bg span{
+  display:block;
+  font-family:'Playfair Display',serif;
+  font-weight:600;
+  font-size:clamp(4.2rem,16.5vw,17rem);
+  line-height:1;
+  letter-spacing:.015em;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(212,175,55,.26);
+  white-space:nowrap;
+  will-change:transform;
+}
+.hero-inner{
+  position:relative;
+  z-index:2;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  max-width:720px;
+  will-change:transform,opacity;
+}
+.hero-inner .rule{margin-bottom:26px;}
+.hero-eyebrow{
+  font-size:.62rem;
+  font-weight:400;
+  letter-spacing:.4em;
+  text-transform:uppercase;
+  color:var(--faint);
+  margin-bottom:22px;
+}
+.hero-title{
+  font-family:'Playfair Display',serif;
+  font-weight:400;
+  font-size:clamp(2.35rem,6.4vw,4.6rem);
+  line-height:1.06;
+  letter-spacing:.015em;
+  margin-bottom:24px;
+  text-wrap:balance;
+}
+.hero-sub{
+  max-width:440px;
+  font-size:clamp(.82rem,1.5vw,.95rem);
+  line-height:1.9;
+  color:var(--muted);
+}
+/* Scroll cue */
+.hero-scroll{
+  position:absolute;
+  left:50%;
+  bottom:34px;
+  transform:translateX(-50%);
+  z-index:3;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:12px;
+  font-size:.56rem;
+  letter-spacing:.34em;
+  text-transform:uppercase;
+  color:var(--faint);
+  transition:color .4s ease;
+}
+.hero-scroll:hover{color:var(--gold);}
+.hero-scroll .track{
+  width:1px;height:56px;
+  background:linear-gradient(180deg,rgba(212,175,55,0),var(--gold));
+  position:relative;
+  overflow:hidden;
+}
+.hero-scroll .track::after{
+  content:"";
+  position:absolute;
+  top:0;left:0;
+  width:1px;height:22px;
+  background:var(--white);
+  animation:scrollLine 2.4s var(--ease) infinite;
+}
+@keyframes scrollLine{
+  0%{transform:translateY(-24px);opacity:0;}
+  35%{opacity:1;}
+  100%{transform:translateY(56px);opacity:0;}
+}
+
+/* ============================================================
+   6. SECTION FRAME
+   ============================================================ */
+.section{
+  position:relative;
+  padding:var(--section-y) var(--pad-x);
+}
+.section-head{
+  max-width:var(--maxw);
+  margin:0 auto clamp(44px,5vw,70px);
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:36px;
+  flex-wrap:wrap;
+}
+.section-head .eyebrow{display:block;margin-bottom:20px;}
+.section-title{
+  font-family:'Playfair Display',serif;
+  font-weight:400;
+  font-size:clamp(1.9rem,4.2vw,3.1rem);
+  line-height:1.12;
+  letter-spacing:.005em;
+}
+.section-note{
+  max-width:340px;
+  font-size:.8rem;
+  line-height:1.9;
+  color:var(--faint);
+  padding-bottom:6px;
+}
+
+/* ============================================================
+   7. COLLECTION GRID
+   ============================================================ */
+.collection{background:var(--bg);}
+.grid{
+  max-width:var(--maxw);
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:clamp(26px,3.4vw,46px) clamp(22px,2.8vw,36px);
+}
+.product{cursor:pointer;}
+.product-media{
+  position:relative;
+  aspect-ratio:4/5;
+  overflow:hidden;
+  background:
+    radial-gradient(120% 90% at 30% 10%,#1b1a17 0%,#121211 45%,#0c0c0b 100%);
+}
+.product-media img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  filter:saturate(.92) contrast(1.02);
+  transition:transform 1.15s var(--ease),filter .7s ease;
+  will-change:transform;
+}
+/* Gold hairline frame that appears on hover */
+.product-media::after{
+  content:"";
+  position:absolute;
+  inset:9px;
+  border:1px solid var(--gold);
+  opacity:0;
+  transform:scale(1.015);
+  transition:opacity .55s ease,transform .55s var(--ease);
+  pointer-events:none;
+  z-index:2;
+}
+.product:hover .product-media img{
+  transform:scale(1.055);
+  filter:saturate(1) contrast(1.04);
+}
+.product:hover .product-media::after{
+  opacity:1;
+  transform:scale(1);
+}
+/* Placeholder shown if an image file is missing */
+.product-media .ph{
+  position:absolute;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  font-family:'Playfair Display',serif;
+  font-size:2.4rem;
+  letter-spacing:.1em;
+  color:rgba(212,175,55,.35);
+  z-index:1;
+}
+.product-media.is-missing img{opacity:0;}
+.product-media.is-missing .ph{display:flex;}
+
+.product-meta{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:14px;
+  margin-top:20px;
+  padding-top:16px;
+  border-top:1px solid var(--line);
+  transition:border-color .5s ease;
+}
+.product:hover .product-meta{border-top-color:rgba(212,175,55,.4);}
+.product-name{
+  font-family:'Playfair Display',serif;
+  font-weight:400;
+  font-size:clamp(.98rem,1.4vw,1.12rem);
+  letter-spacing:.03em;
+  line-height:1.4;
+}
+.product-price{
+  font-size:.68rem;
+  font-weight:400;
+  letter-spacing:.14em;
+  color:var(--gold);
+  white-space:nowrap;
+}
+
+/* ============================================================
+   8. ABOUT
+   ============================================================ */
+.about{
+  background:linear-gradient(180deg,#0a0a0a 0%,#0d0d0c 50%,#0a0a0a 100%);
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+.about-grid{
+  max-width:var(--maxw);
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  gap:clamp(40px,6vw,96px);
+  align-items:center;
+}
+.about-text .eyebrow{display:block;margin-bottom:22px;}
+.about-title{
+  font-family:'Playfair Display',serif;
+  font-weight:400;
+  font-size:clamp(1.95rem,4vw,3.15rem);
+  line-height:1.14;
+  margin-bottom:28px;
+}
+.about-title em{
+  font-style:italic;
+  color:var(--gold);
+}
+.about-body p{
+  font-size:.87rem;
+  line-height:2;
+  color:var(--muted);
+  margin-bottom:18px;
+  max-width:460px;
+}
+.about-facts{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0 28px;
+  margin-top:38px;
+  border-top:1px solid var(--line);
+}
+.about-facts li{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:16px 0;
+  border-bottom:1px solid var(--line);
+  font-size:.64rem;
+  letter-spacing:.19em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.62);
+}
+.about-facts li::before{
+  content:"";
+  width:5px;height:5px;
+  flex:0 0 5px;
+  transform:rotate(45deg);
+  background:var(--gold);
+}
+.about-media{
+  position:relative;
+  aspect-ratio:4/5;
+  background:
+    repeating-linear-gradient(45deg,#131312 0 12px,#0f0f0e 12px 24px);
+  overflow:hidden;
+}
+.about-media img{
+  width:100%;height:100%;
+  object-fit:cover;
+  filter:grayscale(.15) contrast(1.05);
+}
+.about-media::before{
+  content:"";
+  position:absolute;
+  inset:18px;
+  border:1px solid rgba(212,175,55,.55);
+  z-index:3;
+  pointer-events:none;
+}
+/* Offset gold frame detail */
+.about-media-wrap{position:relative;}
+.about-media-wrap::after{
+  content:"";
+  position:absolute;
+  right:-18px;
+  bottom:-18px;
+  width:58%;
+  height:58%;
+  border-right:1px solid rgba(212,175,55,.35);
+  border-bottom:1px solid rgba(212,175,55,.35);
+  pointer-events:none;
+}
+.about-badge{
+  position:absolute;
+  left:0;bottom:0;
+  z-index:4;
+  padding:14px 22px;
+  background:var(--gold);
+  color:#0a0a0a;
+  font-size:.58rem;
+  font-weight:600;
+  letter-spacing:.26em;
+  text-transform:uppercase;
+}
+.about-media .ph{
+  position:absolute;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  font-family:'Playfair Display',serif;
+  font-size:2.6rem;
+  letter-spacing:.14em;
+  color:rgba(212,175,55,.3);
+}
+.about-media.is-missing img{opacity:0;}
+.about-media.is-missing .ph{display:flex;}
+
+/* ============================================================
+   9. FOOTER / CONTACT
+   ============================================================ */
+.footer{
+  padding:clamp(78px,10vw,130px) var(--pad-x) 34px;
+  background:#070707;
+}
+.footer-cta{
+  max-width:660px;
+  margin:0 auto;
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+.footer-cta .eyebrow{margin-bottom:22px;}
+.footer-cta h2{
+  font-family:'Playfair Display',serif;
+  font-weight:400;
+  font-size:clamp(1.9rem,4.4vw,3.2rem);
+  line-height:1.15;
+  margin-bottom:18px;
+}
+.footer-cta p{
+  max-width:400px;
+  font-size:.82rem;
+  line-height:1.9;
+  color:var(--muted);
+  margin-bottom:36px;
+}
+
+/* Big gold CTA */
+.btn-gold{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  gap:16px;
+  padding:21px 46px;
+  background:linear-gradient(135deg,var(--gold-light) 0%,var(--gold) 52%,var(--gold-dark) 100%);
+  color:#0a0a0a;
+  font-family:'Montserrat',sans-serif;
+  font-size:.72rem;
+  font-weight:600;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  overflow:hidden;
+  box-shadow:0 10px 34px rgba(212,175,55,.16);
+  transition:transform .5s var(--ease),box-shadow .5s ease;
+}
+.btn-gold span{position:relative;z-index:2;}
+.btn-gold .arrow{
+  position:relative;
+  z-index:2;
+  display:inline-block;
+  transition:transform .5s var(--ease);
+}
+.btn-gold::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(135deg,var(--gold-light),#f4e6b8 50%,var(--gold));
+  opacity:0;
+  transition:opacity .5s ease;
+  z-index:1;
+}
+.btn-gold:hover{
+  transform:translateY(-3px);
+  box-shadow:0 18px 46px rgba(212,175,55,.28);
+}
+.btn-gold:hover::before{opacity:1;}
+.btn-gold:hover .arrow{transform:translateX(6px);}
+.btn-gold:focus-visible{outline:2px solid var(--white);outline-offset:4px;}
+
+.footer-info{
+  max-width:var(--maxw);
+  margin:clamp(64px,8vw,104px) auto 0;
+  padding-top:46px;
+  border-top:1px solid var(--line);
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:36px;
+}
+.footer-info .label{
+  display:block;
+  font-size:.58rem;
+  font-weight:500;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:12px;
+}
+.footer-info a,
+.footer-info address{
+  font-style:normal;
+  font-size:.86rem;
+  letter-spacing:.03em;
+  color:rgba(255,255,255,.74);
+  transition:color .4s ease;
+}
+.footer-info a:hover{color:var(--gold);}
+
+.footer-bottom{
+  max-width:var(--maxw);
+  margin:56px auto 0;
+  padding-top:24px;
+  border-top:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  flex-wrap:wrap;
+  font-size:.62rem;
+  letter-spacing:.16em;
+  color:rgba(255,255,255,.34);
+  text-transform:uppercase;
+}
+.footer-bottom .mark{
+  font-family:'Playfair Display',serif;
+  letter-spacing:.3em;
+  color:rgba(255,255,255,.5);
+}
+.to-top{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  transition:color .4s ease;
+}
+.to-top:hover{color:var(--gold);}
+
+/* ============================================================
+   10. RESPONSIVE
+   ============================================================ */
+@media (max-width:1024px){
+  .nav{display:none;}
+  .about-grid{gap:44px;}
+}
+
+@media (max-width:768px){
+  :root{--section-y:78px;}
+
+  .site-header{padding:18px var(--pad-x);}
+  .site-header.is-scrolled{padding:14px var(--pad-x);}
+
+  .hero{padding:120px 22px 100px;}
+  .hero-bg span{font-size:clamp(4rem,22vw,9rem);-webkit-text-stroke-width:1px;opacity:.9;}
+  .hero-title{font-size:clamp(2rem,9vw,2.9rem);}
+  .hero-sub{max-width:330px;font-size:.8rem;}
+  .hero-scroll{bottom:24px;gap:9px;}
+  .hero-scroll .track{height:42px;}
+
+  /* Single column collection */
+  .grid{grid-template-columns:1fr;gap:38px;}
+  .product-media{aspect-ratio:4/5;}
+
+  .section-head{flex-direction:column;align-items:flex-start;gap:20px;}
+  .section-note{max-width:100%;}
+
+  .about-grid{grid-template-columns:1fr;gap:48px;}
+  .about-body p{max-width:100%;}
+  .about-media{aspect-ratio:4/5;max-width:520px;}
+  .about-media-wrap::after{right:-10px;bottom:-10px;}
+
+  .footer-info{grid-template-columns:1fr;gap:26px;padding-top:38px;}
+  .footer-bottom{flex-direction:column;align-items:flex-start;gap:12px;}
+
+  .btn-gold{width:100%;justify-content:center;padding:19px 26px;font-size:.66rem;letter-spacing:.19em;}
+}
+
+@media (max-width:480px){
+  .logo{font-size:1rem;letter-spacing:.28em;text-indent:.28em;}
+  .lang{padding:3px;}
+  .lang-btn{padding:6px 12px;font-size:.6rem;letter-spacing:.12em;}
+
+  .hero-bg span{font-size:22vw;}
+  .hero-eyebrow{font-size:.55rem;letter-spacing:.3em;}
+  .hero-title{font-size:2rem;}
+
+  .section-title{font-size:1.75rem;}
+  .product-name{font-size:1rem;}
+  .product-price{font-size:.64rem;}
+
+  .about-title{font-size:1.85rem;}
+  .about-facts{grid-template-columns:1fr;}
+  .about-facts li{font-size:.6rem;}
+
+  .footer-cta h2{font-size:1.75rem;}
+  .footer-info a,.footer-info address{font-size:.8rem;}
+  .footer-bottom{font-size:.56rem;letter-spacing:.12em;}
+}
+
+/* Respect users who prefer less motion */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  .reveal{opacity:1;transform:none;transition:none;}
+  .hero-bg span,.hero-inner{transform:none !important;opacity:1 !important;}
+  .hero-scroll .track::after{animation:none;}
+  *{transition-duration:.001ms !important;}
+}
+</style>
+</head>
+<body>
+
+<!-- ============================ HEADER ============================ -->
+<header class="site-header" id="site-header">
+  <div class="header-inner">
+    <a href="#top" class="logo" aria-label="TRILLION">TRILLION</a>
+
+    <nav class="nav" aria-label="Main">
+      <a href="#collection" data-i18n="nav.collection">Коллекция</a>
+      <a href="#about" data-i18n="nav.about">О бренде</a>
+      <a href="#contact" data-i18n="nav.contact">Контакты</a>
+    </nav>
+
+    <!-- Language switcher: text is pulled from the I18N dictionary in the script -->
+    <div class="lang" role="group" aria-label="Language / Язык / Til">
+      <button type="button" class="lang-btn is-active" data-lang="ru" aria-pressed="true">RU</button>
+      <button type="button" class="lang-btn" data-lang="uz" aria-pressed="false">UZ</button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============================ HERO ============================ -->
+  <section class="hero" aria-label="TRILLION">
+    <!-- Decorative, oversized wordmark (parallax layer) -->
+    <div class="hero-bg" aria-hidden="true"><span>TRILLION</span></div>
+
+    <div class="hero-inner">
+      <span class="rule" aria-hidden="true"></span>
+      <p class="hero-eyebrow" data-i18n="hero.eyebrow">Осень / Зима 2026</p>
+
+      <h1 class="hero-title" data-i18n="hero.lead">Премиальное мужское трико</h1>
+
+      <p class="hero-sub" data-i18n="hero.sub">
+        Мужское трико из плотного премиального хлопка. Точная посадка, благородная матовость, свобода движения.
+      </p>
+    </div>
+
+    <a href="#collection" class="hero-scroll" aria-label="Scroll to collection">
+      <span class="track" aria-hidden="true"></span>
+      <span data-i18n="hero.scroll">Листайте</span>
+    </a>
+  </section>
+
+  <!-- ============================ COLLECTION ============================ -->
+  <section class="section collection" id="collection">
+    <div class="section-head reveal">
+      <div>
+        <p class="eyebrow"><span class="idx">01</span><span data-i18n="collection.eyebrow">Коллекция</span></p>
+        <h2 class="section-title" data-i18n="collection.title">Избранные модели</h2>
+      </div>
+      <p class="section-note" data-i18n="collection.note">
+        Шесть моделей мужского трико из премиального хлопка. Свобода движения, безупречная посадка, тихий люкс.
+      </p>
+    </div>
+
+    <div class="grid">
+
+      <article class="product reveal" style="--d:.02s">
+        <figure class="product-media">
+          <img src="images/image1.jpg" alt="Мужское трико Classic Black"
+               data-i18n-alt="product.1.alt"
+               loading="lazy" onerror="this.parentElement.classList.add('is-missing')">
+          <span class="ph" aria-hidden="true">T</span>
+        </figure>
+        <div class="product-meta">
+          <h3 class="product-name" data-i18n="product.1.name">Трико Classic Black</h3>
+          <p class="product-price">450 000 UZS</p>
+        </div>
+      </article>
+
+      <article class="product reveal" style="--d:.10s">
+        <figure class="product-media">
+          <img src="images/image2.jpg" alt="Мужское трико Sport Grey"
+               data-i18n-alt="product.2.alt"
+               loading="lazy" onerror="this.parentElement.classList.add('is-missing')">
+          <span class="ph" aria-hidden="true">T</span>
+        </figure>
+        <div class="product-meta">
+          <h3 class="product-name" data-i18n="product.2.name">Трико Sport Grey</h3>
+          <p class="product-price">490 000 UZS</p>
+        </div>
+      </article>
+
+      <article class="product reveal" style="--d:.18s">
+        <figure class="product-media">
+          <img src="images/image3.jpg" alt="Мужское трико Premium Navy"
+               data-i18n-alt="product.3.alt"
+               loading="lazy" onerror="this.parentElement.classList.add('is-missing')">
+          <span class="ph" aria-hidden="true">T</span>
+        </figure>
+        <div class="product-meta">
+          <h3 class="product-name" data-i18n="product.3.name">Трико Premium Navy</h3>
+          <p class="product-price">520 000 UZS</p>
+        </div>
+      </article>
+
+      <article class="product reveal" style="--d:.02s">
+        <figure class="product-media">
+          <img src="images/image4.jpg" alt="Мужское трико Urban Khaki"
+               data-i18n-alt="product.4.alt"
+               loading="lazy" onerror="this.parentElement.classList.add('is-missing')">
+          <span class="ph" aria-hidden="true">T</span>
+        </figure>
+        <div class="product-meta">
+          <h3 class="product-name" data-i18n="product.4.name">Трико Urban Khaki</h3>
+          <p class="product-price">550 000 UZS</p>
+        </div>
+      </article>
+
+      <article class="product reveal" style="--d:.10s">
+        <figure class="product-media">
+          <img src="images/image5.jpg" alt="Мужское трико Elite Beige"
+               data-i18n-alt="product.5.alt"
+               loading="lazy" onerror="this.parentElement.classList.add('is-missing')">
+          <span class="ph" aria-hidden="true">T</span>
+        </figure>
+        <div class="product-meta">
+          <h3 class="product-name" data-i18n="product.5.name">Трико Elite Beige</h3>
+          <p class="product-price">580 000 UZS</p>
+        </div>
+      </article>
+
+      <article class="product reveal" style="--d:.18s">
+        <figure class="product-media">
+          <img src="images/image6.jpg" alt="Мужское трико Signature Gold"
+               data-i18n-alt="product.6.alt"
+               loading="lazy" onerror="this.parentElement.classList.add('is-missing')">
+          <span class="ph" aria-hidden="true">T</span>
+        </figure>
+        <div class="product-meta">
+          <h3 class="product-name" data-i18n="product.6.name">Трико Signature Gold</h3>
+          <p class="product-price">650 000 UZS</p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ============================ ABOUT ============================ -->
+  <section class="section about" id="about">
+    <div class="about-grid">
+
+      <div class="about-text reveal">
+        <p class="eyebrow"><span class="idx">02</span><span data-i18n="about.eyebrow">Философия</span></p>
+        <h2 class="about-title" data-i18n="about.title">Crafted with passion</h2>
+
+        <div class="about-body">
+          <p data-i18n="about.p1">TRILLION — это не просто трико. Это комфорт, который ты чувствуешь.</p>
+          <p data-i18n="about.p2">Создано для мужчин, которые ценят стиль и свободу движения.</p>
+        </div>
+
+        <ul class="about-facts">
+          <li data-i18n="about.fact1">Премиальный хлопок</li>
+          <li data-i18n="about.fact2">Свобода движения</li>
+          <li data-i18n="about.fact3">Лимитированные серии</li>
+          <li data-i18n="about.fact4">Сделано в Узбекистане</li>
+        </ul>
+      </div>
+
+      <div class="about-media-wrap reveal" style="--d:.12s">
+        <figure class="about-media">
+          <img src="images/texture.jpg" alt="Ткань премиального трико"
+               data-i18n-alt="about.alt"
+               loading="lazy" onerror="this.parentElement.classList.add('is-missing')">
+          <span class="ph" aria-hidden="true">TRILLION</span>
+          <figcaption class="about-badge">Est. 2026</figcaption>
+        </figure>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================ FOOTER ============================ -->
+<footer class="footer" id="contact">
+  <div class="footer-cta reveal">
+    <p class="eyebrow"><span class="idx">03</span><span data-i18n="footer.eyebrow">Поддержка</span></p>
+    <h2 data-i18n="footer.title">Сотрудничество</h2>
+    <p data-i18n="footer.text">
+      Вопросы по размерам, доставке и оптовым заказам. Напишите нам — ответим лично.
+    </p>
+
+    <!-- CTA redirects to Telegram -->
+    <a class="btn-gold" href="https://t.me/TRILLION_VIP_BOT" target="_blank" rel="noopener noreferrer">
+      <span data-i18n="footer.cta">Сотрудничать</span>
+      <span class="arrow" aria-hidden="true">&rarr;</span>
+    </a>
+  </div>
+
+  <div class="footer-info reveal">
+    <div>
+      <span class="label" data-i18n="footer.email">Почта</span>
+      <a href="mailto:hello@trillion.uz">hello@trillion.uz</a>
+    </div>
+    <div>
+      <span class="label" data-i18n="footer.phone">Телефон</span>
+      <a href="tel:+998901234567">+998 90 123 45 67</a>
+    </div>
+    <div>
+      <span class="label" data-i18n="footer.address">Адрес</span>
+      <address data-i18n="footer.addr">Ташкент, Узбекистан</address>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span>&copy; 2026 TRILLION. <span data-i18n="footer.rights">Все права защищены.</span></span>
+    <span class="mark" data-i18n="footer.tag">Premium Men's Trico</span>
+    <a href="#top" class="to-top">
+      <span data-i18n="footer.top">Наверх</span>
+      <span aria-hidden="true">&uarr;</span>
+    </a>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   TRILLION — interactions
+   1. Bilingual dictionary + switcher (RU / UZ)
+   2. Sticky header state + hero parallax
+   3. IntersectionObserver fade-in reveals
+   ============================================================ */
+(function () {
+  'use strict';
+
+  /* ---------- 1. TRANSLATIONS ---------- */
+  /* Every visible string lives here. Elements point at a key via data-i18n. */
+  var I18N = {
+    "ru": {
+      "nav.collection": "Коллекция",
+      "nav.about": "О бренде",
+      "nav.contact": "Контакты",
+
+      "hero.eyebrow": "Осень / Зима 2026",
+      "hero.lead": "Премиальное мужское трико",
+      "hero.sub": "Мужское трико из плотного премиального хлопка. Точная посадка, благородная матовость, свобода движения.",
+      "hero.scroll": "Листайте",
+
+      "collection.eyebrow": "Коллекция",
+      "collection.title": "Избранные модели",
+      "collection.note": "Шесть моделей мужского трико из премиального хлопка. Свобода движения, безупречная посадка, тихий люкс.",
+
+      "product.1.name": "Трико Classic Black",
+      "product.1.alt": "Мужское трико Classic Black",
+      "product.2.name": "Трико Sport Grey",
+      "product.2.alt": "Мужское трико Sport Grey",
+      "product.3.name": "Трико Premium Navy",
+      "product.3.alt": "Мужское трико Premium Navy",
+      "product.4.name": "Трико Urban Khaki",
+      "product.4.alt": "Мужское трико Urban Khaki",
+      "product.5.name": "Трико Elite Beige",
+      "product.5.alt": "Мужское трико Elite Beige",
+      "product.6.name": "Трико Signature Gold",
+      "product.6.alt": "Мужское трико Signature Gold",
+
+      "about.eyebrow": "Философия",
+      "about.title": "Crafted with passion",
+      "about.p1": "TRILLION — это не просто трико. Это комфорт, который ты чувствуешь.",
+      "about.p2": "Создано для мужчин, которые ценят стиль и свободу движения.",
+      "about.fact1": "Премиальный хлопок",
+      "about.fact2": "Свобода движения",
+      "about.fact3": "Лимитированные серии",
+      "about.fact4": "Сделано в Узбекистане",
+      "about.alt": "Ткань премиального трико",
+
+      "footer.eyebrow": "Поддержка",
+      "footer.title": "Сотрудничество",
+      "footer.text": "Вопросы по размерам, доставке и оптовым заказам. Напишите нам — ответим лично.",
+      "footer.cta": "Сотрудничать",
+      "footer.email": "Почта",
+      "footer.phone": "Телефон",
+      "footer.address": "Адрес",
+      "footer.addr": "Ташкент, Узбекистан",
+      "footer.rights": "Все права защищены.",
+      "footer.tag": "Premium Men's Trico",
+      "footer.top": "Наверх"
+    },
+
+    "uz": {
+      "nav.collection": "Kolleksiya",
+      "nav.about": "Brend haqida",
+      "nav.contact": "Aloqa",
+
+      "hero.eyebrow": "Kuz / Qish 2026",
+      "hero.lead": "Premium erkaklar trikosi",
+      "hero.sub": "Zich premium paxtadan erkaklar trikosi. Aniq bichim, olijanob matolik, harakat erkinligi.",
+      "hero.scroll": "Pastga",
+
+      "collection.eyebrow": "Kolleksiya",
+      "collection.title": "Tanlangan modellar",
+      "collection.note": "Premium paxtadan olti model erkaklar trikosi. Harakat erkinligi, mukammal bichim, sokin hashamat.",
+
+      "product.1.name": "Klassik qora triko",
+      "product.1.alt": "Klassik qora erkaklar trikosi",
+      "product.2.name": "Sport kulrang triko",
+      "product.2.alt": "Sport kulrang erkaklar trikosi",
+      "product.3.name": "Premium to'q ko'k triko",
+      "product.3.alt": "Premium to'q ko'k erkaklar trikosi",
+      "product.4.name": "Urban xaki triko",
+      "product.4.alt": "Urban xaki erkaklar trikosi",
+      "product.5.name": "Elite bej triko",
+      "product.5.alt": "Elite bej erkaklar trikosi",
+      "product.6.name": "Signature oltin triko",
+      "product.6.alt": "Signature oltin erkaklar trikosi",
+
+      "about.eyebrow": "Falsafa",
+      "about.title": "Mehr bilan yaratilgan",
+      "about.p1": "TRILLION — bu shunchaki triko emas. Bu siz his qiladigan qulaylik.",
+      "about.p2": "Uslub va harakat erkinligini qadrlaydigan erkaklar uchun yaratilgan.",
+      "about.fact1": "Premium paxta",
+      "about.fact2": "Harakat erkinligi",
+      "about.fact3": "Cheklangan seriyalar",
+      "about.fact4": "O'zbekistonda ishlab chiqarilgan",
+      "about.alt": "Premium triko matosi",
+
+      "footer.eyebrow": "Qo'llab-quvvatlash",
+      "footer.title": "Hamkorlik",
+      "footer.text": "O'lchamlar, yetkazib berish va ulgurji buyurtmalar bo'yicha savollar. Bizga yozing — shaxsan javob beramiz.",
+      "footer.cta": "Hamkorlik qilish",
+      "footer.email": "Pochta",
+      "footer.phone": "Telefon",
+      "footer.address": "Manzil",
+      "footer.addr": "Toshkent, O'zbekiston",
+      "footer.rights": "Barcha huquqlar himoyalangan.",
+      "footer.tag": "Premium erkaklar trikosi",
+      "footer.top": "Yuqoriga"
+    }
+  };
+
+  /* ---------- 1b. LANGUAGE SWITCHER ---------- */
+  var root = document.documentElement;
+  var langButtons = Array.prototype.slice.call(document.querySelectorAll('.lang-btn'));
+
+  function applyLanguage(lang) {
+    lang = I18N[lang] ? lang : 'ru';
+    var dict = I18N[lang];
+    root.setAttribute('lang', lang);
+
+    // Replace the text of every element bound to a dictionary key
+    document.querySelectorAll('[data-i18n]').forEach(function (el) {
+      var value = dict[el.getAttribute('data-i18n')];
+      if (typeof value === 'string') el.textContent = value;
+    });
+
+    // Replace image alt text from the same dictionary
+    document.querySelectorAll('img[data-i18n-alt]').forEach(function (img) {
+      var alt = dict[img.getAttribute('data-i18n-alt')];
+      if (alt) img.setAttribute('alt', alt);
+    });
+
+    // Reflect the active state on the switcher
+    langButtons.forEach(function (btn) {
+      var isActive = btn.getAttribute('data-lang') === lang;
+      btn.classList.toggle('is-active', isActive);
+      btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+    });
+
+    // Remember the choice for the next visit
+    try { localStorage.setItem('trillion-lang', lang); } catch (e) {}
+  }
+
+  langButtons.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      applyLanguage(btn.getAttribute('data-lang'));
+    });
+  });
+
+  var savedLang = null;
+  try { savedLang = localStorage.getItem('trillion-lang'); } catch (e) {}
+  applyLanguage(savedLang || 'ru');
+
+  /* ---------- 2. HEADER + PARALLAX ---------- */
+  var header = document.getElementById('site-header');
+  var heroWord = document.querySelector('.hero-bg span');
+  var heroInner = document.querySelector('.hero-inner');
+  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ticking = false;
+
+  function onFrame() {
+    var y = window.pageYOffset || document.documentElement.scrollTop;
+
+    // Header becomes solid after the first 40px
+    if (header) header.classList.toggle('is-scrolled', y > 40);
+
+    if (!reducedMotion) {
+      var vh = window.innerHeight;
+
+      // Background wordmark drifts slower than the page
+      if (heroWord) {
+        heroWord.style.transform = 'translate3d(0,' + (y * 0.32).toFixed(2) + 'px,0)';
+      }
+
+      // Foreground content lifts slightly and fades out
+      if (heroInner && y < vh) {
+        heroInner.style.transform = 'translate3d(0,' + (y * 0.12).toFixed(2) + 'px,0)';
+        heroInner.style.opacity = Math.max(0, 1 - y / (vh * 0.82)).toFixed(3);
+      }
+    }
+
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', function () {
+    if (!ticking) {
+      ticking = true;
+      window.requestAnimationFrame(onFrame);
+    }
+  }, { passive: true });
+
+  onFrame();
+
+  /* ---------- 3. SCROLL REVEALS ---------- */
+  var revealItems = document.querySelectorAll('.reveal');
+
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -7% 0px' });
+
+    revealItems.forEach(function (item) { observer.observe(item); });
+  } else {
+    // Fallback for very old browsers
+    revealItems.forEach(function (item) { item.classList.add('is-visible'); });
+  }
+
+  /* ---------- 4. IMAGE FALLBACK SAFETY ---------- */
+  // If an image error fired before this script ran, mark it now.
+  var allImages = document.querySelectorAll('.product-media img, .about-media img');
+  allImages.forEach(function (img) {
+    if (img.complete && img.naturalWidth === 0) {
+      img.parentElement.classList.add('is-missing');
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
